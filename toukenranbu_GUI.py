@@ -69,7 +69,7 @@ def limited_loop():
             except:
                 break
             try:
-                pyautogui.locateOnScreen(r'button\warnning1.PNG', confidence=0.8, grayscale=True)
+                pyautogui.locateOnScreen(r'button\warnning1.PNG', confidence=0.9, grayscale=True)
                 tkinter.messagebox.showwarning(title='刀劍重傷警告!!',
                                                message='刀劍重傷，繼續行軍可能造成刀劍破壞，周回功能強制結束。')
                 break
@@ -109,7 +109,7 @@ def infinite_loop_start():
         except:
             break
         try:
-            pyautogui.locateOnScreen(r'button\warnning1.PNG', confidence=0.8, grayscale=True)
+            pyautogui.locateOnScreen(r'button\warnning1.PNG', confidence=0.9, grayscale=True)
             tkinter.messagebox.showwarning(title='刀劍重傷警告!!', message='刀劍重傷，繼續行軍可能造成刀劍破壞，周回功能強制結束。')
             break
         except:
