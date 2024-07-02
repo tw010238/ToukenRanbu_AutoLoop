@@ -8,7 +8,7 @@ from moyooshimono_senriyokukakujuu import senriyokukakujuu_loop as event
 '''主畫面'''
 win = tk.Tk()
 win.title('tokenranbu_loop')
-win.geometry("180x540+0+470")
+win.geometry("180x750+0+200")
 win.iconbitmap(r'other_img\icon.ico')
 win.resizable(width=False,height=False)
 win.attributes('-topmost',True)
@@ -18,34 +18,48 @@ win.attributes('-topmost',True)
 reminder = tk.Label(text='請登入至本丸畫面\n再啟動Loop\n-----------------------------',font=20)
 reminder.pack()
 
+'''合戰場/催物 切換'''
+reminder = tk.Label(text="戰場選擇",font=16)
+reminder.pack()
+BattleField = tk.StringVar()
+radio_btn1 = tk.Radiobutton(win, text='合戰場',variable=BattleField, value=1)
+radio_btn1.place(x=0,y=90,width=85,height=30)
+radio_btn1.select()  # 搭配 select() 方法選取 radio_btn1
+
+radio_btn2 = tk.Radiobutton(win, text='催物',variable=BattleField, value=2)
+radio_btn2.place(x=90,y=90,width=85,height=30)
+
+reminder = tk.Label(text='-----------------------------',font=20)
+reminder.place(x=0,y=115)
+
 
 '''下拉選單'''
-reminder = tk.Label(text = '周回設定',font=20)
-reminder.pack()
+reminder = tk.Label(text = '合戰場 周回設定',font=20)
+reminder.place(anchor='center',x=90,y=155)
 reminder = tk.Label(text = '--時代選擇--',font=20)
-reminder.pack()
-box1 = ttk.Combobox(win,values=['一','二','三','四','五','六','七','八','異去','催物'])
-box1.pack()
+reminder.place(anchor='center',x=90,y=185)
+box1 = ttk.Combobox(win,values=['一','二','三','四','五','六','七','八'],width=15)
+box1.place(anchor='center',x=90,y=215)
 reminder = tk.Label(text = '--地域(難度)選擇--',font=20)
-reminder.pack()
-box2 = ttk.Combobox(win,values=['一','二','三','四','其他'])
-box2.pack()
+reminder.place(anchor='center',x=90,y=245)
+box2 = ttk.Combobox(win,values=['一','二','三','四'],width=15)
+box2.place(anchor='center',x=90,y=275)
 reminder = tk.Label(text = '--部隊選擇--',font=20)
-reminder.pack()
-box3 = ttk.Combobox(win,values=['一','二','三','四','五'])
-box3.pack()
+reminder.place(anchor='center',x=90,y=305)
+box3 = ttk.Combobox(win,values=['一','二','三','四','五'],width=15)
+box3.place(anchor='center',x=90,y=335)
 divider = tk.Label(text= '-----------------------------------')
-divider.pack()
+divider.place(anchor='center',x=90,y=365)
 
 
 '''有限循環'''
 loop_time1= tk.Label(text='指定次數循環',font=16)
-loop_time1.pack()
+loop_time1.place(anchor='center',x=90,y=395)
 loop_time2= tk.Label(text='請輸入循環次數(正整數)')
-loop_time2.pack()
+loop_time2.place(anchor='center',x=90,y=425)
 
-inputbox = tk.Entry()
-inputbox.pack()
+inputbox = tk.Entry(width=18)
+inputbox.place(anchor='center',x=90,y=455)
 
 def limited_loop():
     if box1.get() == "" or box2.get() == "" or box3.get() == "":
@@ -57,12 +71,7 @@ def limited_loop():
         count = 0
         while limit > count:
             loop_time2.config(text=f'已完成：{count}/{limit}')
-            if box1.get() == "催物":
-                event(box2.get(),box3.get())    # 這裡的函式根據遊戲目前活動，在最上面要import不同函式
-            elif box1.get() == "異去":        # 待開發
-                break
-            else:
-                tkrb.loop(box1.get(),box2.get(),box3.get())
+            tkrb.loop(box1.get(),box2.get(),box3.get())
             try:
                 pyautogui.locateOnScreen(r'button\DMM GAMES.PNG')
                 count += 1
@@ -82,14 +91,14 @@ def limited_loop():
 
 btn1 = tk.Button(text='確定',font=16)
 btn1.config(command=limited_loop)
-btn1.pack()
+btn1.place(anchor='center',x=90,y=485)
 
 divider = tk.Label(text= '-----------------------------------')
-divider.pack()
+divider.place(anchor='center',x=90,y=515)
 
 '''無限循環'''
 infinite_loop_label = tk.Label(text='無限循環',font=16)
-infinite_loop_label.pack()
+infinite_loop_label.place(anchor='center',x=90,y=545)
 
 infinite_loop = tk.Button(text= '開始',font=16)
 def infinite_loop_start():
@@ -97,12 +106,7 @@ def infinite_loop_start():
     count = 0
     while True:
         infinite_loop_label.config(text =f'無限循環(完成{count})',font=16)
-        if box1.get() == "催物":
-            event(box2.get(), box3.get())  # 這裡的函式根據遊戲目前活動，在最上面要import不同函式
-        elif box1.get() == "異去":  # 待開發
-            break
-        else:
-            tkrb.loop(box1.get(), box2.get(), box3.get())
+        tkrb.loop(box1.get(), box2.get(), box3.get())
         try:
             pyautogui.locateOnScreen(r'button\DMM GAMES.PNG')
             count += 1
@@ -117,14 +121,15 @@ def infinite_loop_start():
     infinite_loop_label.config(text='無限循環',font=16)
 
 infinite_loop.config(command=infinite_loop_start)
-infinite_loop.pack()
+infinite_loop.place(anchor='center',x=90,y=575)
 
 divider = tk.Label(text= '-----------------------------------')
-divider.pack()
+divider.place(anchor='center',x=90,y=605)
 
 '''停止'''
-stop_label = tk.Label(text='網頁左上沒有DMM\n就會停止程式')
-stop_label.pack()
+stop_label = tk.Label(text='網頁左上沒有DMM\n就會停止程式\n請以切螢幕的方式\n遮住網頁左上的DMM')
+stop_label.place(anchor='center',x=90,y=660)
 
 
+#
 win.mainloop()
