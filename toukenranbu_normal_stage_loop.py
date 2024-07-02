@@ -11,6 +11,8 @@ def start_the_battle(Chapter,field,team):
     index = pyautogui.locateOnScreen(r'button\001.PNG', confidence=0.8, grayscale=True)
     index_coordinate = pyautogui.center(index)
     pyautogui.moveTo(index_coordinate,duration=0.2)    # 點擊目錄
+    pyautogui.click()
+    time.sleep(1)
     index_start = pyautogui.locateOnScreen(r'button\index_start.PNG', confidence=0.8, grayscale=True)
     index_start_coordinate = pyautogui.center(index_start)
     pyautogui.moveTo(index_start_coordinate, duration=0.2)    # 點擊目錄的出陣
@@ -63,32 +65,47 @@ def start_the_battle(Chapter,field,team):
 
     # 選擇地區
     if field == '一':
-        pyautogui.moveTo(x=484, y=640, duration=0.2)
+        scene_1 = pyautogui.locateOnScreen(r'button\scene_1.PNG', confidence=0.8, grayscale=True)
+        scene_coordinate = pyautogui.center(scene_1)
     elif field == '二':
-        pyautogui.moveTo(x=815, y=640, duration=0.2)
+        scene_2 = pyautogui.locateOnScreen(r'button\scene_2.PNG', confidence=0.8, grayscale=True)
+        scene_coordinate = pyautogui.center(scene_2)
     elif field == '三':
-        pyautogui.moveTo(x=1142, y=640, duration=0.2)
+        scene_3 = pyautogui.locateOnScreen(r'button\scene_3.PNG', confidence=0.8, grayscale=True)
+        scene_coordinate = pyautogui.center(scene_3)
     elif field == '四':
-        pyautogui.moveTo(x=1482, y=640, duration=0.2)
+        scene_4 = pyautogui.locateOnScreen(r'button\scene_4.PNG', confidence=0.8, grayscale=True)
+        scene_coordinate = pyautogui.center(scene_4)
+    pyautogui.moveTo(scene_coordinate, duration=0.2)
     pyautogui.click()
-    pyautogui.moveTo(x=1575, y=936, duration=0.2)        # 部隊選擇
+
+    # 部隊選擇按鍵
+    choose_team = pyautogui.locateOnScreen(r'button\choose_team.PNG', confidence=0.8, grayscale=True)
+    choose_team_coordinate = pyautogui.center(choose_team)
+    pyautogui.moveTo(choose_team_coordinate, duration=0.2)
     pyautogui.click()
-    time.sleep(0.1)
+    time.sleep(0.5)
 
     # 部隊選擇
     if team == '一':
-        pyautogui.moveTo(x=406, y=335, duration=0.2)
+        team_1 = pyautogui.locateOnScreen(r'button\team_1.PNG', confidence=0.8, grayscale=True)
+        team_coordinate = pyautogui.center(team_1)
     elif team == '二':
-        pyautogui.moveTo(x=538, y=335, duration=0.2)
+        team_2 = pyautogui.locateOnScreen(r'button\team_2.PNG', confidence=0.8, grayscale=True)
+        team_coordinate = pyautogui.center(team_2)
     elif team == '三':
-        pyautogui.moveTo(x=670, y=335, duration=0.2)
+        team_3 = pyautogui.locateOnScreen(r'button\team_3.PNG', confidence=0.8, grayscale=True)
+        team_coordinate = pyautogui.center(team_3)
     elif team == '四':
-        pyautogui.moveTo(x=802, y=335, duration=0.2)
+        team_4 = pyautogui.locateOnScreen(r'button\team_4.PNG', confidence=0.8, grayscale=True)
+        team_coordinate = pyautogui.center(team_4)
     elif team == '五':
-        pyautogui.moveTo(x=934, y=335, duration=0.2)
+        team_5 = pyautogui.locateOnScreen(r'button\team_5.PNG', confidence=0.8, grayscale=True)
+        team_coordinate = pyautogui.center(team_5)
+    pyautogui.moveTo(team_coordinate, duration=0.2)
     pyautogui.click()
     pyautogui.moveTo(1570,920,duration=0.2)    # 出陣
-    pyautogui.click()
+    # pyautogui.click()
 
 
 # 下一關
@@ -125,3 +142,10 @@ def next_stage():
 def loop(Chapter,field,team):
     start_the_battle(Chapter,field,team)
     next_stage()
+
+
+
+# 測試行
+
+# time.sleep(2)
+# start_the_battle("四","四","四")
