@@ -106,7 +106,7 @@ def start_the_battle(Chapter,field,team):
     pyautogui.moveTo(team_coordinate, duration=0.2)
     pyautogui.click()
     pyautogui.moveTo(1570,920,duration=0.2)    # 出陣
-    # pyautogui.click()
+    pyautogui.click()
 
 
 # 下一關
