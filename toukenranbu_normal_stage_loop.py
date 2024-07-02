@@ -116,23 +116,23 @@ def next_stage():
             break
         except:
             try:
-                next_button = pyautogui.locateOnScreen(r'button\next_stage.PNG')
+                next_button = pyautogui.locateOnScreen(r'button\next_stage.PNG',confidence=0.8, grayscale = True)
                 next_button_center = pyautogui.center(next_button)
                 pyautogui.moveTo(next_button_center,duration=0.2)
                 pyautogui.click()
             except:
                 try:
-                    pyautogui.locateOnScreen(r'button\home.PNG')
+                    pyautogui.locateOnScreen(r'button\home.PNG',confidence=0.8, grayscale = True)
                     break
                 except:
                     try:
-                        formation = pyautogui.locateOnScreen(r'button\formation.PNG')
+                        formation = pyautogui.locateOnScreen(r'button\formation.PNG',confidence=0.8, grayscale = True)
                         formation_center = pyautogui.center(formation)
                         pyautogui.moveTo(formation_center, duration=0.2)
                         pyautogui.click()
                     except:
                         try:
-                            pyautogui.locateOnScreen(r'button\DMM GAMES.PNG')
+                            pyautogui.locateOnScreen(r'button\DMM GAMES.PNG',confidence=0.8, grayscale = True)
                             pyautogui.moveTo(266, 994, 0.2)
                             pyautogui.click()
                             time.sleep(0.8)
