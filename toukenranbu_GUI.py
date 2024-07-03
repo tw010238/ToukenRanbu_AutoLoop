@@ -24,8 +24,18 @@ def NS_win():
     # reminder.pack()
     BFC_box = ttk.Combobox(NS_win,values=['合戰場','催物'],width=15)
     BFC_box.place(anchor='center',x=90,y=80)
+    def switch_battlefield():
+        if BFC_box.get() == "":
+            tkinter.messagebox.showwarning(title='選擇戰場為空',
+                                           message='請先選擇戰場，再進行切換')
+        elif BFC_box.get() == '合戰場':
+            tkinter.messagebox.showwarning(title='已在戰場',
+                                           message='已在合戰場，不需切換')
+        elif BFC_box.get() == '催物':
+            NS_win.destroy()
 
-    switch_button = tk.Button(NS_win, text='戰場切換')
+
+    switch_button = tk.Button(NS_win, text='戰場切換',command=switch_battlefield)
     switch_button.place(anchor='center',x=90,y=115)
 
     reminder = tk.Label(text='-----------------------------',font=20)
@@ -132,5 +142,3 @@ def NS_win():
 
 
     NS_win.mainloop()
-
-NS_win()
