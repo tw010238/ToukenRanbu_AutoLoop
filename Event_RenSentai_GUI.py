@@ -5,14 +5,14 @@ import toukenranbu_normal_stage_loop as tkrb
 import pyautogui
 import time
 from moyooshimono_senriyokukakujuu import senriyokukakujuu_loop as event
-def NS_win():
+def ERS_win():
     '''主畫面'''
-    NS_win = tk.Tk()
-    NS_win.title('tokenranbu_loop')
-    NS_win.geometry("180x750+0+220")
-    NS_win.iconbitmap(r'other_img\icon.ico')
-    NS_win.resizable(width=False,height=False)
-    NS_win.attributes('-topmost',True)
+    ERS_win = tk.Tk()
+    ERS_win.title('tokenranbu_loop')
+    ERS_win.geometry("180x750+0+220")
+    ERS_win.iconbitmap(r'other_img\icon.ico')
+    ERS_win.resizable(width=False,height=False)
+    ERS_win.attributes('-topmost',True)
 
 
     '''簡介'''
@@ -20,15 +20,13 @@ def NS_win():
     reminder.pack()
 
     '''返回戰場選擇'''
-    # reminder = tk.Label(text="戰場選擇",font=16)
-    # reminder.pack()
-    reminder = tk.Label(text="合戰場",font=20)
+    reminder = tk.Label(text="催物 - 連戰隊",font=20)
     reminder.place(anchor='center',x=90,y=80)
     def return_BFC():
-        NS_win.destroy()
+        ERS_win.destroy()
 
 
-    switch_button = tk.Button(NS_win, text='返回戰場選擇',command=return_BFC)
+    switch_button = tk.Button(ERS_win, text='返回戰場選擇',command=return_BFC)
     switch_button.place(anchor='center',x=90,y=115)
 
     reminder = tk.Label(text='-----------------------------',font=20)
@@ -39,17 +37,17 @@ def NS_win():
     '''下拉選單'''
     reminder = tk.Label(text = '周回設定',font=20)
     reminder.place(anchor='center',x=90,y=170)
-    reminder = tk.Label(text = '--時代選擇--',font=20)
+    reminder = tk.Label(text = '--難度選擇--',font=20)
     reminder.place(anchor='center',x=90,y=200)
-    box1 = ttk.Combobox(NS_win,values=['一','二','三','四','五','六','七','八'],width=15)
+    box1 = ttk.Combobox(ERS_win,values=['難易度‧易','難易度‧普','難易度‧難','難易度‧超難'],width=15)
     box1.place(anchor='center',x=90,y=230)
-    reminder = tk.Label(text = '--地域(難度)選擇--',font=20)
+    reminder = tk.Label(text = '--小判補充--',font=20)
     reminder.place(anchor='center',x=90,y=260)
-    box2 = ttk.Combobox(NS_win,values=['一','二','三','四'],width=15)
+    box2 = ttk.Combobox(ERS_win,values=['不補充','單個補充','三個補充','全部補充'],width=15)
     box2.place(anchor='center',x=90,y=290)
     reminder = tk.Label(text = '--部隊選擇--',font=20)
     reminder.place(anchor='center',x=90,y=320)
-    box3 = ttk.Combobox(NS_win,values=['一','二','三','四','五'],width=15)
+    box3 = ttk.Combobox(ERS_win,values=['一','二','三','四','五'],width=15)
     box3.place(anchor='center',x=90,y=350)
     divider = tk.Label(text= '-----------------------------------')
     divider.place(anchor='center',x=90,y=380)
@@ -134,5 +132,7 @@ def NS_win():
     stop_label.place(anchor='center',x=90,y=675)
 
 
-    NS_win.mainloop()
+    ERS_win.mainloop()
+
+# ERS_win()
 

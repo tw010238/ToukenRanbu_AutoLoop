@@ -1,4 +1,5 @@
 from toukenranbu_GUI import NS_win
+from Event_RenSentai_GUI import ERS_win
 import tkinter as tk
 from tkinter import ttk
 
@@ -11,7 +12,7 @@ def BFC():
     main_win.resizable(width=False,height=False)
     main_win.attributes('-topmost',True)
     # 標題
-    reminder = tk.Label(text='戰場選擇',font=20)
+    reminder = tk.Label(text='選擇戰場',font=20)
     reminder.place(anchor='center',x=150,y=25)
     #戰場選擇
     BFC_box = ttk.Combobox(main_win,values=['合戰場','催物','異化'],width=15)
@@ -22,6 +23,12 @@ def BFC():
         if BFC_box.get() == '合戰場':
             main_win.destroy()
             NS_win()
+        elif BFC_box.get() == '催物':
+            main_win.destroy()
+            ERS_win()
+        elif BFC_box.get() == '異化':
+            tk.messagebox.showwarning(title='功能開發中',
+                                           message='功能開發中')
 
     # 前往戰場(按鍵)
     switch_button = tk.Button(main_win, text='戰場選擇',command=choose_battlefield)
