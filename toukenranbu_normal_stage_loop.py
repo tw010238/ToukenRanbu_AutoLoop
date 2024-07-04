@@ -105,7 +105,9 @@ def start_the_battle(Chapter,field,team):
         team_coordinate = pyautogui.center(team_5)
     pyautogui.moveTo(team_coordinate, duration=0.2)
     pyautogui.click()
-    pyautogui.moveTo(1570,920,duration=0.2)    # 出陣
+    start_button = pyautogui.locateOnScreen(r'button\008.PNG', confidence=0.9, grayscale=True)
+    start_button_coordinate = pyautogui.center(start_button)
+    pyautogui.moveTo(start_button_coordinate, duration=0.2)  # 出陣
     pyautogui.click()
 
 

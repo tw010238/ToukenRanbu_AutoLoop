@@ -131,6 +131,8 @@ def ERS_win():
     stop_label = tk.Label(text='網頁左上沒有DMM\n就會停止程式\n請以切螢幕的方式\n遮住網頁左上的DMM')
     stop_label.place(anchor='center',x=90,y=675)
 
+    reminder = tk.Label(text='進關隊伍刀裝記得更改',foreground='red')
+    reminder.place(anchor='center',x=90,y=730)
 
     ERS_win.mainloop()
 
