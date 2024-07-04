@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter.messagebox
 from tkinter import ttk
-import toukenranbu_normal_stage_loop as tkrb
+import Event_RenSentai as ERS
 import pyautogui
 import time
 from moyooshimono_senriyokukakujuu import senriyokukakujuu_loop as event
@@ -72,7 +72,9 @@ def ERS_win():
             count = 0
             while limit > count:
                 loop_time2.config(text=f'已完成：{count}/{limit}')
-                tkrb.loop(box1.get(),box2.get(),box3.get())
+                KeepOrStop = ERS.ERS_loop(box1.get(),box2.get(),box3.get())
+                if KeepOrStop == 'stop':
+                    break
                 try:
                     pyautogui.locateOnScreen(r'button\DMM GAMES.PNG')
                     count += 1
@@ -107,7 +109,7 @@ def ERS_win():
         count = 0
         while True:
             infinite_loop_label.config(text =f'無限循環(完成{count})',font=16)
-            tkrb.loop(box1.get(), box2.get(), box3.get())
+            ERS.ERS_loop(box1.get(), box2.get(), box3.get())
             try:
                 pyautogui.locateOnScreen(r'button\DMM GAMES.PNG')
                 count += 1

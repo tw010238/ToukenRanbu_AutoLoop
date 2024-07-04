@@ -1,5 +1,6 @@
 import pyautogui
 import time
+from tool.click_button import click_button
 
 
 
@@ -29,7 +30,7 @@ def start_the_battle(difficulty,auto_replenish,team):      #replenish = refill
     ERS_stage_coordinate = pyautogui.center(ERS_stage)
     pyautogui.moveTo(ERS_stage_coordinate, duration=0.2)  # 催物
     pyautogui.click()
-    time.sleep(0.5)
+    time.sleep(1.5)
     if difficulty == '難易度‧易':
         difficulty_1 = pyautogui.locateOnScreen(r'button\ERS\easy_mode.PNG', confidence=0.9, grayscale=True)
         difficulty_coordinate = pyautogui.center(difficulty_1)
@@ -74,11 +75,37 @@ def start_the_battle(difficulty,auto_replenish,team):      #replenish = refill
     start_button_coordinate = pyautogui.center(start_button)
     pyautogui.moveTo(start_button_coordinate, duration=0.2)  # 出陣
     pyautogui.click()
-    time.sleep(0.5)
-    decide = pyautogui.locateOnScreen(r'button\ERS\decide.PNG', confidence=0.9, grayscale=True)
-    decide_coordinate = pyautogui.center(decide)
-    pyautogui.moveTo(decide_coordinate, duration=0.2)
-    pyautogui.click()
+    time.sleep(1)
+    while True:
+        try:
+            decide = pyautogui.locateOnScreen(r'button\ERS\decide.PNG', confidence=0.9, grayscale=True)
+            decide_coordinate = pyautogui.center(decide)
+            pyautogui.moveTo(decide_coordinate, duration=0.2)
+            pyautogui.click()
+            return 'start'
+        except:
+            if auto_replenish == '不補充':
+                return 'stop'
+            elif auto_replenish == '單個補充':
+                replenish = pyautogui.locateOnScreen(r'button\ERS\replenish_1.PNG', confidence=0.9, grayscale=True)
+            elif auto_replenish == '三個補充':
+                replenish = pyautogui.locateOnScreen(r'button\ERS\replenish_3.PNG', confidence=0.9, grayscale=True)
+            elif auto_replenish == '全部補充':
+                replenish = pyautogui.locateOnScreen(r'button\ERS\full_replenish.PNG', confidence=0.9, grayscale=True)
+            replenish_coordinate = pyautogui.center(replenish)
+            pyautogui.moveTo(replenish_coordinate, duration=0.2)
+            pyautogui.click()
+            time.sleep(0.5)
+            yes = pyautogui.locateOnScreen(r'button\yes.PNG', confidence=0.9, grayscale=True)
+            yes_coordinate = pyautogui.center(yes)
+            pyautogui.moveTo(yes_coordinate, duration=0.2)
+            pyautogui.click()
+            close = pyautogui.locateOnScreen(r'button\close.PNG', confidence=0.9, grayscale=True)
+            close_coordinate = pyautogui.center(close)
+            pyautogui.moveTo(close_coordinate, duration=0.2)
+            pyautogui.click()
+            time.sleep(1)
+
 
 
 # 下一關
@@ -90,13 +117,14 @@ def next_stage():
             break
         except:
             try:    # 行軍按鍵出現 下一關
-                next_button = pyautogui.locateOnScreen(r'button\next_stage.PNG',confidence=0.9, grayscale = True)
+                next_button = pyautogui.locateOnScreen(r'button\ERS\continue.PNG',confidence=0.9, grayscale = True)
                 next_button_center = pyautogui.center(next_button)
                 pyautogui.moveTo(next_button_center,duration=0.2)
                 pyautogui.click()
             except:
-                try:    # 出現特殊關卡
-                    pyautogui.locateOnScreen(r'button\ERS\special.PNG', confidence=0.9, grayscale=True)
+                try:    # 沒回到丸本的狀況
+                    pyautogui.locateOnScreen(r'button\choose_team.PNG', confidence=0.9, grayscale=True)
+                    time.sleep(3)
                     break
                 except:
                     try:    # 丸本圖案出現 結束
@@ -117,71 +145,75 @@ def next_stage():
                             except:
                                 break
 
-# 特別關卡
-def special(difficulty,team):
-    if difficulty == '難易度‧易':
-        difficulty_1 = pyautogui.locateOnScreen(r'button\ERS\easy_mode.PNG', confidence=0.9, grayscale=True)
-        difficulty_coordinate = pyautogui.center(difficulty_1)
-    elif difficulty == '難易度‧普':
-        difficulty_2 = pyautogui.locateOnScreen(r'button\ERS\normal_mode.PNG', confidence=0.9, grayscale=True)
-        difficulty_coordinate = pyautogui.center(difficulty_2)
-    elif difficulty == '難易度‧難':
-        difficulty_3 = pyautogui.locateOnScreen(r'button\ERS\hard_mode.PNG', confidence=0.9, grayscale=True)
-        difficulty_coordinate = pyautogui.center(difficulty_3)
-    elif difficulty == '難易度‧超難':
-        difficulty_4 = pyautogui.locateOnScreen(r'button\ERS\super_mode.PNG', confidence=0.9, grayscale=True)
-        difficulty_coordinate = pyautogui.center(difficulty_4)
-
-    pyautogui.moveTo(difficulty_coordinate,duration=0.2)
-    pyautogui.click()
-    choose_team = pyautogui.locateOnScreen(r'button\choose_team.PNG', confidence=0.9, grayscale=True)
-    choose_team_coordinate = pyautogui.center(choose_team)
-    pyautogui.moveTo(choose_team_coordinate, duration=0.2)    # 部隊選擇
-    pyautogui.click()
-    time.sleep(0.5)
-
-    # 部隊選擇
-    if team == '一':
-        team_1 = pyautogui.locateOnScreen(r'button\team_1.PNG', confidence=0.9, grayscale=True)
-        team_coordinate = pyautogui.center(team_1)
-    elif team == '二':
-        team_2 = pyautogui.locateOnScreen(r'button\team_2.PNG', confidence=0.9, grayscale=True)
-        team_coordinate = pyautogui.center(team_2)
-    elif team == '三':
-        team_3 = pyautogui.locateOnScreen(r'button\team_3.PNG', confidence=0.9, grayscale=True)
-        team_coordinate = pyautogui.center(team_3)
-    elif team == '四':
-        team_4 = pyautogui.locateOnScreen(r'button\team_4.PNG', confidence=0.9, grayscale=True)
-        team_coordinate = pyautogui.center(team_4)
-    elif team == '五':
-        team_5 = pyautogui.locateOnScreen(r'button\team_5.PNG', confidence=0.9, grayscale=True)
-        team_coordinate = pyautogui.center(team_5)
-    pyautogui.moveTo(team_coordinate, duration=0.2)
-    pyautogui.click()
-    start_button = pyautogui.locateOnScreen(r'button\008.PNG', confidence=0.9, grayscale=True)
-    start_button_coordinate = pyautogui.center(start_button)
-    pyautogui.moveTo(start_button_coordinate, duration=0.2)  # 出陣
-    pyautogui.click()
-    time.sleep(0.5)
-    decide = pyautogui.locateOnScreen(r'button\ERS\decide.PNG', confidence=0.9, grayscale=True)
-    decide_coordinate = pyautogui.center(decide)
-    pyautogui.moveTo(decide_coordinate, duration=0.2)
-    pyautogui.click()
+# # 特別關卡
+# def special(difficulty,team):
+#     if difficulty == '難易度‧易':
+#         difficulty_1 = pyautogui.locateOnScreen(r'button\ERS\easy_mode.PNG', confidence=0.9, grayscale=True)
+#         difficulty_coordinate = pyautogui.center(difficulty_1)
+#     elif difficulty == '難易度‧普':
+#         difficulty_2 = pyautogui.locateOnScreen(r'button\ERS\normal_mode.PNG', confidence=0.9, grayscale=True)
+#         difficulty_coordinate = pyautogui.center(difficulty_2)
+#     elif difficulty == '難易度‧難':
+#         difficulty_3 = pyautogui.locateOnScreen(r'button\ERS\hard_mode.PNG', confidence=0.9, grayscale=True)
+#         difficulty_coordinate = pyautogui.center(difficulty_3)
+#     elif difficulty == '難易度‧超難':
+#         difficulty_4 = pyautogui.locateOnScreen(r'button\ERS\super_mode.PNG', confidence=0.9, grayscale=True)
+#         difficulty_coordinate = pyautogui.center(difficulty_4)
+#
+#     pyautogui.moveTo(difficulty_coordinate,duration=0.2)
+#     pyautogui.click()
+#     choose_team = pyautogui.locateOnScreen(r'button\choose_team.PNG', confidence=0.9, grayscale=True)
+#     choose_team_coordinate = pyautogui.center(choose_team)
+#     pyautogui.moveTo(choose_team_coordinate, duration=0.2)    # 部隊選擇
+#     pyautogui.click()
+#     time.sleep(0.5)
+#
+#     # 部隊選擇
+#     if team == '一':
+#         team_1 = pyautogui.locateOnScreen(r'button\team_1.PNG', confidence=0.9, grayscale=True)
+#         team_coordinate = pyautogui.center(team_1)
+#     elif team == '二':
+#         team_2 = pyautogui.locateOnScreen(r'button\team_2.PNG', confidence=0.9, grayscale=True)
+#         team_coordinate = pyautogui.center(team_2)
+#     elif team == '三':
+#         team_3 = pyautogui.locateOnScreen(r'button\team_3.PNG', confidence=0.9, grayscale=True)
+#         team_coordinate = pyautogui.center(team_3)
+#     elif team == '四':
+#         team_4 = pyautogui.locateOnScreen(r'button\team_4.PNG', confidence=0.9, grayscale=True)
+#         team_coordinate = pyautogui.center(team_4)
+#     elif team == '五':
+#         team_5 = pyautogui.locateOnScreen(r'button\team_5.PNG', confidence=0.9, grayscale=True)
+#         team_coordinate = pyautogui.center(team_5)
+#     pyautogui.moveTo(team_coordinate, duration=0.2)
+#     pyautogui.click()
+#     start_button = pyautogui.locateOnScreen(r'button\008.PNG', confidence=0.9, grayscale=True)
+#     start_button_coordinate = pyautogui.center(start_button)
+#     pyautogui.moveTo(start_button_coordinate, duration=0.2)  # 出陣
+#     pyautogui.click()
+#     time.sleep(0.5)
+#     decide = pyautogui.locateOnScreen(r'button\ERS\decide.PNG', confidence=0.9, grayscale=True)
+#     decide_coordinate = pyautogui.center(decide)
+#     pyautogui.moveTo(decide_coordinate, duration=0.2)
+#     pyautogui.click()
 
 
 def ERS_loop(difficulty,field,team):
-    start_the_battle(difficulty,field,team)
-    next_stage()
-    try:
-        pyautogui.locateOnScreen(r'button\ERS\special.PNG', confidence=0.9, grayscale=True)
-        special(difficulty,team)
+    S_T = start_the_battle(difficulty,field,team)
+    if S_T == 'start':
         next_stage()
-    except:
-        pass
+        return 'keep'
+    else:
+        return 'stop'
+    # try:
+    #     pyautogui.locateOnScreen(r'button\ERS\special.PNG', confidence=0.9, grayscale=True)
+    #     special(difficulty,team)
+    #     next_stage()
+    # except:
+    #     pass
 
 
 
-# 測試行
-time.sleep(2)
-ERS_loop('難易度‧超難','全部補充','一')
-# start_the_battle('難易度‧難','全部補充','四')
+# # 測試行
+# time.sleep(2)
+# ERS_loop('難易度‧超難','全部補充','一')
+# # start_the_battle('難易度‧難','全部補充','四')
